@@ -34,17 +34,19 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  const { draw, length, nama } = req.query;
-  var condition = nama ? { nama: { [Op.like]: `%${nama}%` } } : null;
-  const { limit, offset } = getPagination(draw, length);
+  const { start, length, search, draw } = req.query;
+  var condition = search.value != '' ? {
+    nama: { [Op.like]: `%${search.value}%` },
+  } : null;
+  const { limit, offset } = getPagination(start, length);
   Pasien.findAndCountAll({
       where: condition,
       limit,
       offset,
-      attributes: ["id", "nama",'no_rm','no_ktp'],
+      attributes: ["id", "nama",'no_rm','tgl_lahir','alamat'],
     })
       .then((data) => {
-        const response = getPagingData(data, draw, limit);
+        const response = getPagingData(draw, data, start, limit);
         res.send(response);
       })
       .catch((err) => {
@@ -57,13 +59,12 @@ exports.findAll = (req, res) => {
 
   const getPagination = (page, size) => {
     const limit = size ? +size : 1;
-    const offset = page ? page * limit : 0;
+    const offset = parseInt(page);
     return { limit, offset };
   };
 
-  const getPagingData = (dataRow, page, limit) => {
+  const getPagingData = (draw, dataRow, page, limit) => {
     const { count: recordsTotal, rows: data } = dataRow;
-    const draw = page ? +page : 0;
     const totalPages = Math.ceil(recordsTotal / limit);
     const recordsFiltered = recordsTotal;
     return { recordsTotal, recordsFiltered, data, totalPages, draw };
