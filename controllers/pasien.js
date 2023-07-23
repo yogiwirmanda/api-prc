@@ -36,7 +36,7 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
   const { start, length, search, draw } = req.query;
   var condition = search.value != '' ? {
-    nama: { [Op.like]: `%${search.value}%` },
+    nama: { [Op.like]: `%${search.value}%` }
   } : null;
   const { limit, offset } = getPagination(start, length);
   Pasien.findAndCountAll({
