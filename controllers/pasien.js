@@ -43,7 +43,7 @@ exports.findAll = (req, res) => {
       where: condition,
       limit,
       offset,
-      attributes: ["id", "nama",'no_rm','tgl_lahir','alamat'],
+      attributes: ["id", "nama",'no_rm','no_ktp','tgl_lahir','alamat'],
     })
       .then((data) => {
         const response = getPagingData(draw, data, start, limit);
