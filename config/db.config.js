@@ -2,7 +2,7 @@ module.exports = {
     HOST: '103.186.0.18',
     USER: 'wiwe-ubuntu',
     PASSWORD: '123456',
-    DB: 'appbayu',
+    DB: 'app_bayu',
     dialect: 'mysql',
     pool: {
         max: 5,
