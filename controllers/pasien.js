@@ -34,10 +34,22 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  const { start, length, search, draw } = req.query;
-  var condition = search.value != '' ? {
-    nama: { [Op.like]: `%${search.value}%` }
-  } : null;
+  const { start, length, draw, no_rm , nama, no_ktp, alamat } = req.query;
+  var condition = {}
+  if (no_rm != undefined && no_rm.length > 0){
+    condition.no_rm = {[Op.like] : '%' + no_rm + '%'}
+  }
+  if (nama != undefined && nama.length > 0){
+    condition.nama = {[Op.like] : '%' + nama + '%'}
+  }
+  if (no_ktp != undefined && no_ktp.length > 0){
+    condition.no_ktp = {[Op.like] : '%' + no_ktp + '%'}
+  }
+  if (alamat != undefined && alamat.length > 0){
+    condition.alamat = {[Op.like] : '%' + alamat + '%'}
+  }
+  console.log(nama)
+  console.log(condition)
   const { limit, offset } = getPagination(start, length);
   Pasien.findAndCountAll({
       where: condition,
