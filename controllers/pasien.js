@@ -48,14 +48,12 @@ exports.findAll = (req, res) => {
   if (alamat != undefined && alamat.length > 0){
     condition.alamat = {[Op.like] : '%' + alamat + '%'}
   }
-  console.log(nama)
-  console.log(condition)
   const { limit, offset } = getPagination(start, length);
   Pasien.findAndCountAll({
       where: condition,
       limit,
       offset,
-      attributes: ["id", "nama",'no_rm','no_ktp','tgl_lahir','alamat'],
+      attributes: ["id", "nama",'no_rm','no_ktp','tgl_lahir','alamat', 'jk', 'status_kawin'],
     })
       .then((data) => {
         const response = getPagingData(draw, data, start, limit);

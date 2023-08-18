@@ -9,6 +9,12 @@ module.exports = (sequelize, Sequelize) => {
         no_ktp: {
             type: Sequelize.STRING,
         },
+        jk: {
+            type: Sequelize.STRING,
+        },
+        status_kawin: {
+            type: Sequelize.STRING,
+        },
         tgl_lahir: {
             type: Sequelize.STRING,
         },
