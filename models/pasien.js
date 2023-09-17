@@ -21,6 +21,12 @@ module.exports = (sequelize, Sequelize) => {
         alamat: {
             type: Sequelize.TEXT,
         },
+        status_prolanis: {
+            type: Sequelize.STRING,
+        },
+        status_prb: {
+            type: Sequelize.STRING,
+        },
     });
     return Pasien;
 }
