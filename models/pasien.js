@@ -27,6 +27,12 @@ module.exports = (sequelize, Sequelize) => {
         status_prb: {
             type: Sequelize.STRING,
         },
+        cara_bayar: {
+            type: Sequelize.STRING,
+        },
+        no_bpjs: {
+            type: Sequelize.STRING,
+        },
     });
     return Pasien;
 }
